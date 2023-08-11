@@ -1,11 +1,22 @@
 import React from "react";
+import { notFound } from "next/navigation";
+
+export const dynamicParams = true; //it will try to fetch the ticket with id that is not generated below
+
+export async function generateStaticParams() {
+  const res = await fetch("http://localhost:4000/tickets");
+  const tickets = await res.json();
+  return tickets.map((ticket) => ({ id: ticket.id }));
+}
 
 async function getTicket(id) {
   const res = await fetch(`http://localhost:4000/tickets/${id}`, {
     next: {
-      revalidate: 60, // use 0 to opt out of using cache
+      revalidate: 60, // it will regenerate after 60 seconds
     },
   });
+
+  if (!res.ok) notFound();
 
   return res.json();
 }
