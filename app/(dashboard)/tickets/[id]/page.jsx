@@ -9,6 +9,15 @@ export async function generateStaticParams() {
   return tickets.map((ticket) => ({ id: ticket.id }));
 }
 
+export async function generateMetadata({ params }) {
+  const res = await fetch(`http://localhost:4000/tickets/${params.id}`);
+  const ticket = await res.json();
+
+  return {
+    title: `Helpdesk | ${ticket.title}`,
+  };
+}
+
 async function getTicket(id) {
   const res = await fetch(`http://localhost:4000/tickets/${id}`, {
     next: {
