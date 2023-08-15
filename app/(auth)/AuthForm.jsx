@@ -1,0 +1,25 @@
+"use client";
+
+import React from "react";
+import { useState } from "react";
+
+const AuthForm = ({ handleSubmit }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  return (
+    <form onSubmit={(e) => handleSubmit(e, email, password)}>
+      <label>
+        <span>Email:</span>
+        <input type='email' placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} required />
+      </label>
+      <label>
+        <span>Password:</span>
+        <input type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} value={password} required />
+      </label>
+      <button className='btn-primary'>Submit</button>
+    </form>
+  );
+};
+
+export default AuthForm;
