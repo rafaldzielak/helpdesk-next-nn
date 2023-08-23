@@ -8,8 +8,6 @@ const DashboardLayout = async ({ children }) => {
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
 
-  console.log(data);
-
   if (!data.session) redirect("/login");
 
   return (

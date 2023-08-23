@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useState } from "react";
+import { addTicket } from "../actions";
 
 const CreateForm = () => {
   const router = useRouter();
@@ -30,7 +31,7 @@ const CreateForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='w-1/2'>
+    <form action={addTicket} className='w-1/2'>
       <label>
         <span>Title:</span>
         <input required type='text' onChange={(e) => setTitle(e.target.value)} value={title} />
